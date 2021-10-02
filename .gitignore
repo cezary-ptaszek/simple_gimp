@@ -1,0 +1,13 @@
+
+*~
+*.swp
+*.bak
+*.pyc
+*.o
+.DS_Store
+.token
+venv/*
+*.pickle
+.idea/*
+.vscode/*
+in.tsv
