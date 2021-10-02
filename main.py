@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.font as font
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
+from PIL import ImageTk, Image
 
 VALUES = ['Desaturacja',
           'Kontrast',
@@ -10,19 +11,20 @@ VALUES = ['Desaturacja',
 
 def chooseFile():
     filename = askopenfilename(initialdir="/", title="Select file")
-    labelChooseFileState['text'] = filename
-    if labelChooseFileState['text'] != 'nie wybrano':
-        img = PhotoImage(file=labelChooseFileState['text'])
-        canvas.create_image(20, 20, anchor=NW, image=img)
+    label = labelChooseFileState['text'] = filename
+    if label != 'nie wybrano':
+        im = Image.open(label)
+        canvas.image = ImageTk.PhotoImage(im)
+        canvas.create_image(0, 0, image=canvas.image, anchor=NW)
 
-
+        
 def run():
     print()
 
 
 window = Tk()
 window.title('Przetwarzanie obrazu')
-window.geometry('500x500')
+window.geometry('500x600')
 window.configure(background='white')
 
 fontStyle = font.Font(family="Lucida Grande", size=15)
@@ -36,7 +38,7 @@ labelChooseFileState = Label(window, text='nie wybrano', bg='white')
 labelChooseFileState.grid(column=1, row=2, columnspan=2, pady=5, padx=10)
 
 labelChoosePeriod = Label(window, text='Wybierz filtr', bg='white')
-labelChoosePeriod.grid(column=0, row=3, pady=20, padx=10)
+labelChoosePeriod.grid(column=0, row=3, columnspan=2, pady=20, padx=10)
 
 comboChoosePeriod = ttk.Combobox(window, values=VALUES, state='readonly')
 comboChoosePeriod.grid(column=2, row=3, pady=20, padx=10)
@@ -46,7 +48,5 @@ buttonRun.grid(column=1, row=4, columnspan=2, pady=5)
 
 canvas = Canvas(window, width=300, height=300)
 canvas.grid(column=1, row=5, columnspan=2, pady=5)
-img = PhotoImage(file='123.png')
-canvas.create_image(20, 20, anchor=NW, image=img)
 
 window.mainloop()
