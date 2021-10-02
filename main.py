@@ -3,6 +3,7 @@ import tkinter.font as font
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 from PIL import ImageTk, Image
+import RGBtoHSL
 
 VALUES = ['Desaturacja',
           'Kontrast',
@@ -11,10 +12,12 @@ VALUES = ['Desaturacja',
 
 def chooseFile():
     filename = askopenfilename(initialdir="/", title="Select file")
-    label = labelChooseFileState['text'] = filename
+    # label = labelChooseFileState['text'] = filename
+    label = labelChooseFileState['text'] = 'sample/owl.jpg'
     if label != 'nie wybrano':
-        im = Image.open(label)
-        canvas.image = ImageTk.PhotoImage(im)
+        global IMPORTED_IMG
+        IMPORTED_IMG = Image.open(label)
+        canvas.image = ImageTk.PhotoImage(IMPORTED_IMG)
         canvas.create_image(0, 0, image=canvas.image, anchor=NW)
 
 
@@ -22,13 +25,16 @@ def run():
     func = comboChooseFunc.get()
     # Desaturacja
     if func == VALUES[0]:
-        ## tu kod desaturacji
+        tab_pix = list(IMPORTED_IMG.getdata())
+        print(tab_pix)
+        for sets in tab_pix:
+            RGBtoHSL.convert(sets[0], sets[1], sets[2])
         print('Desaturacja')
 
 
 window = Tk()
 window.title('Przetwarzanie obrazu')
-window.geometry('500x500')
+window.geometry('500x550')
 window.configure(background='white')
 
 fontStyle = font.Font(family="Lucida Grande", size=15)
