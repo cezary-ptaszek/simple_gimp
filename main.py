@@ -11,6 +11,9 @@ VALUES = ['Desaturacja',
 def chooseFile():
     filename = askopenfilename(initialdir="/", title="Select file")
     labelChooseFileState['text'] = filename
+    if labelChooseFileState['text'] != 'nie wybrano':
+        img = PhotoImage(file=labelChooseFileState['text'])
+        canvas.create_image(20, 20, anchor=NW, image=img)
 
 
 def run():
@@ -34,11 +37,14 @@ labelChooseFileState.grid(column=1, row=2, columnspan=2, pady=5, padx=10)
 
 labelChoosePeriod = Label(window, text='Wybierz filtr', bg='white')
 labelChoosePeriod.grid(column=0, row=3, pady=20, padx=10)
+
 comboChoosePeriod = ttk.Combobox(window, values=VALUES, state='readonly')
 comboChoosePeriod.grid(column=2, row=3, pady=20, padx=10)
 
 buttonRun = Button(window, text='Przetwórz', command=run, width=10)
 buttonRun.grid(column=1, row=4, columnspan=2, pady=5)
 
+canvas = Canvas(window, width=300, height=300)
+canvas.grid(column=1, row=5, columnspan=2, pady=5)
 
 window.mainloop()
