@@ -19,7 +19,11 @@ def chooseFile():
 
 
 def run():
-    print()
+    func = comboChooseFunc.get()
+    # Desaturacja
+    if func == VALUES[0]:
+        ## tu kod desaturacji
+        print('Desaturacja')
 
 
 window = Tk()
@@ -40,8 +44,8 @@ labelChooseFileState.grid(column=1, row=2, columnspan=2, pady=5, padx=10)
 labelChoosePeriod = Label(window, text='Wybierz filtr', bg='white')
 labelChoosePeriod.grid(column=0, row=3, pady=20, padx=10)
 
-comboChoosePeriod = ttk.Combobox(window, values=VALUES, state='readonly')
-comboChoosePeriod.grid(column=2, row=3, pady=20, padx=10)
+comboChooseFunc = ttk.Combobox(window, values=VALUES, state='readonly')
+comboChooseFunc.grid(column=2, row=3, pady=20, padx=10)
 
 buttonRun = Button(window, text='Przetwórz', command=run, width=10)
 buttonRun.grid(column=1, row=4, columnspan=2, pady=5)
