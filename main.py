@@ -11,9 +11,6 @@ VALUES = ['Desaturacja',
 def chooseFile():
     filename = askopenfilename(initialdir="/", title="Select file")
     labelChooseFileState['text'] = filename
-    if labelChooseFileState['text'] != 'nie wybrano':
-        img = PhotoImage(file=labelChooseFileState['text'])
-        canvas.create_image(20, 20, anchor=NW, image=img)
 
 
 def run():
