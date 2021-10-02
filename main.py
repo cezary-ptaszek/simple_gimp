@@ -1,9 +1,11 @@
 from tkinter import *
 import tkinter.font as font
+import tkinter as tk
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
 from PIL import ImageTk, Image
-import RGBtoHSL
+import Algoritms as alg
+import numpy as np
 
 VALUES = ['Desaturacja',
           'Kontrast',
@@ -23,13 +25,28 @@ def chooseFile():
 
 def run():
     func = comboChooseFunc.get()
+    tab_rgb = np.asarray(IMPORTED_IMG)
+    tab = []
+
     # Desaturacja
     if func == VALUES[0]:
-        tab_pix = list(IMPORTED_IMG.getdata())
-        print(tab_pix)
-        for sets in tab_pix:
-            RGBtoHSL.convert(sets[0], sets[1], sets[2])
+        tab = alg.desaturation(tab_rgb)
         print('Desaturacja')
+
+    # Negatyw
+    if func == VALUES[2]:
+        tab = alg.negative(tab_rgb)
+        print('Negatyw')
+
+    create_window(Image.fromarray(tab))
+
+
+def create_window(image):
+    t = tk.Toplevel(window)
+    canvas = Canvas(t, width=300, height=300)
+    canvas.grid(column=0, row=0)
+    canvas.image = ImageTk.PhotoImage(image)
+    canvas.create_image(0, 0, image=canvas.image, anchor=NW)
 
 
 window = Tk()
