@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.font as font
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
+from PIL import ImageTk, Image
 
 VALUES = ['Desaturacja',
           'Kontrast',
@@ -10,7 +11,11 @@ VALUES = ['Desaturacja',
 
 def chooseFile():
     filename = askopenfilename(initialdir="/", title="Select file")
-    labelChooseFileState['text'] = filename
+    label = labelChooseFileState['text'] = filename
+    if label != 'nie wybrano':
+        im = Image.open(label)
+        canvas.image = ImageTk.PhotoImage(im)
+        canvas.create_image(0, 0, image=canvas.image, anchor=NW)
 
 
 def run():
