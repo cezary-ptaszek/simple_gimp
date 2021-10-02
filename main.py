@@ -46,5 +46,7 @@ buttonRun.grid(column=1, row=4, columnspan=2, pady=5)
 
 canvas = Canvas(window, width=300, height=300)
 canvas.grid(column=1, row=5, columnspan=2, pady=5)
+img = PhotoImage(file='123.png')
+canvas.create_image(20, 20, anchor=NW, image=img)
 
 window.mainloop()
