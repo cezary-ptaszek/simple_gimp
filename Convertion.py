@@ -22,7 +22,7 @@ def rgb_to_hsv(r, g, b):
         }[high]
         h /= 6
 
-    return h, s, v
+    return [h, s, v]
 
 
 def hsv_to_rgb(h, s, v):
@@ -41,7 +41,7 @@ def hsv_to_rgb(h, s, v):
         (v, p, q),
     ][int(i % 6)]
 
-    return r, g, b
+    return [r, g, b]
 
 
 def rgb_to_hsl(r, g, b):
